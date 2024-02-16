@@ -5,6 +5,8 @@ module.exports = {
     extend: {
       colors: {
         piloup: "var(--background)",
+        primary: "var(--background-primary)",
+        secondary: "var(--background-secondary)",
       },
     },
   },
