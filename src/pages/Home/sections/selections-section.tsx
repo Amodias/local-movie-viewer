@@ -1,4 +1,6 @@
 import React from "react";
-const SelectionsSection = () => {};
+const SelectionsSection = () => {
+  return <div>h</div>;
+};
 
 export { SelectionsSection };

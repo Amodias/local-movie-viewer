@@ -1,4 +1,6 @@
 import React from "react";
-const MovieSection = () => {};
+const MovieSection = () => {
+  return <div>h</div>;
+};
 
 export { MovieSection };
