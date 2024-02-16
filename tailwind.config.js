@@ -75,6 +75,9 @@ module.exports = {
         "accordion-up": "accordion-up 0.2s ease-out",
       },
     },
+    screens: {
+      xxs: "540px", // min-width
+    },
   },
   plugins: [require("tailwindcss-animate")],
 };

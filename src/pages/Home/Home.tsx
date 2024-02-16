@@ -8,10 +8,12 @@ const Home = () => {
         <MovieSection />
       </div>
       <div className="col-span-2 bg-primary p-10 rounded-lg">
-        <div className="bg-secondary">
+        <div className="bg-secondary rounded">
           <UtilsSection />
         </div>
-        <SelectionsSection />
+        <div className="bg-secondary rounded mt-5 p-5">
+          <SelectionsSection />
+        </div>
       </div>
     </div>
   );
