@@ -4,7 +4,7 @@ import { Input } from "../../../components/ui/input";
 import useMovieUploader from "../../../services/use-movie-uploader";
 
 const UtilsSection = () => {
-  const { movieUrl, getRootProps, getInputProps } = useMovieUploader();
+  const { getRootProps, getInputProps } = useMovieUploader();
   const fileInputRef = useRef(null);
   const linkMovie = () => {
     if (fileInputRef.current) {

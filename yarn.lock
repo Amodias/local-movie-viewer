@@ -8280,6 +8280,11 @@ react-error-overlay@^6.0.11:
   resolved "https://registry.npmjs.org/react-error-overlay/-/react-error-overlay-6.0.11.tgz"
   integrity sha512-/6UZ2qgEyH2aqzYZgQPxEnz33NJ2gNsnHA2o5+o4wW9bLM/JYQitNP9xPhsXwC08hMMovfGe/8retsdDsczPRg==
 
+react-indexed-db-hook@^1.0.14:
+  version "1.0.14"
+  resolved "https://registry.yarnpkg.com/react-indexed-db-hook/-/react-indexed-db-hook-1.0.14.tgz#a29cd732d592735b6a68dfc94316b7a4a091e6be"
+  integrity sha512-tQ6rWofgXUCBhZp9pRpWzthzPbjqcll5uXMo07lbQTKl47VyL9nw9wfVswRxxzS5yj5Sq/VHUkNUjamWbA/M/w==
+
 react-is@^16.13.1:
   version "16.13.1"
   resolved "https://registry.npmjs.org/react-is/-/react-is-16.13.1.tgz"

@@ -1,13 +1,28 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useIndexedDB } from "react-indexed-db-hook";
 import { MoviesItem } from "../../../components/movies-item";
 import { ScrollArea } from "../../../components/ui/scroll-area";
+
 const SelectionsSection = () => {
+  const [movies, setMovies] = useState([]);
+
+  const { getAll } = useIndexedDB("movies");
+
+  useEffect(() => {
+    // Fetch movies from IndexedDB when component mounts
+    getAll().then((movies) => {
+      //@ts-ignore
+      setMovies(movies);
+    });
+  }, []); // Empty dependency array ensures the effect runs only once on component mount
+
   return (
     <ScrollArea className="h-[680px]  rounded-md p-5">
       <div className="space-y-10">
-        <MoviesItem />
-        <MoviesItem />
-        <MoviesItem />
+        {movies.map((movie) => (
+          //@ts-ignore
+          <MoviesItem id={movie.id} url={movie.url} />
+        ))}
       </div>
     </ScrollArea>
   );
