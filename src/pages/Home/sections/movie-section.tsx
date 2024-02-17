@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from "react";
+import "../../../../node_modules/video-react/dist/video-react.css";
 import QRCode from "react-qr-code";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from "../../../components/ui/popover";
-
 import { Player } from "video-react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faQrcode } from "@fortawesome/free-solid-svg-icons";
+
 const MovieSection = () => {
   const [serverIpAddress, setServerIpAddress] = useState("");
 
