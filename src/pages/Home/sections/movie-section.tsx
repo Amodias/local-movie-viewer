@@ -28,14 +28,8 @@ const MovieSection = () => {
   useEffect(() => {
     if (movieId) {
       getByID(movieId).then((movieFromDB) => {
-        console.log("====================================");
-        console.log(movieFromDB);
-        console.log("====================================");
         setMovieUrl(movieFromDB.url);
       });
-      console.log("====================================");
-      console.log(movieUrl);
-      console.log("====================================");
     }
   }, [movieId]);
 
