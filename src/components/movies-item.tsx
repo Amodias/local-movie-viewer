@@ -2,10 +2,14 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Button } from "./ui/button";
 import { faChain, faPlay, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { useIndexedDB } from "react-indexed-db-hook";
+import { useMovieContext } from "../contexts/MovieContext";
 
-const MoviesItem = ({ url, id }: { url: string; id: number }) => {
+const MoviesItem = ({ url, id }: { url: string; id: string }) => {
   const { deleteRecord } = useIndexedDB("movies");
-
+  const { setMovieId } = useMovieContext();
+  const handlePlayButtonClick = () => {
+    setMovieId(id);
+  };
   const handleDelete = () => {
     deleteRecord(id).then(
       () => {
@@ -27,9 +31,7 @@ const MoviesItem = ({ url, id }: { url: string; id: number }) => {
         />
         <Button
           className="absolute top-10 right-5 bg-piloup rounded-md text-white p-4  hover:bg-primary m-2"
-          onClick={() => {
-            // Handle play button click
-          }}
+          onClick={handlePlayButtonClick}
         >
           <FontAwesomeIcon icon={faPlay} />
         </Button>
