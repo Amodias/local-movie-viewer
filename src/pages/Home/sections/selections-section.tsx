@@ -5,16 +5,13 @@ import { ScrollArea } from "../../../components/ui/scroll-area";
 
 const SelectionsSection = () => {
   const [movies, setMovies] = useState([]);
-
   const { getAll } = useIndexedDB("movies");
-
   useEffect(() => {
-    // Fetch movies from IndexedDB when component mounts
     getAll().then((movies) => {
       //@ts-ignore
       setMovies(movies);
     });
-  }, []); // Empty dependency array ensures the effect runs only once on component mount
+  }, []);
 
   return (
     <ScrollArea className="h-[680px]  rounded-md p-5">

@@ -16,7 +16,6 @@ const MovieSection = () => {
   const { movieId } = useMovieContext();
   const { getByID } = useIndexedDB("movies");
   const [movieUrl, setMovieUrl] = useState();
-
   const [serverIpAddress, setServerIpAddress] = useState("");
 
   useEffect(() => {
@@ -36,7 +35,6 @@ const MovieSection = () => {
   return (
     <div className="h-full w-full">
       <div className="px-5 pb-2 pt-10">
-        {/* Render the Player with the appropriate movie ID */}
         {movieId ? (
           <Player playsInline src={movieUrl} />
         ) : (

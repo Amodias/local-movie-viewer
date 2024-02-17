@@ -6,6 +6,7 @@ import useMovieUploader from "../../../services/use-movie-uploader";
 const UtilsSection = () => {
   const { getRootProps, getInputProps } = useMovieUploader();
   const fileInputRef = useRef(null);
+
   const linkMovie = () => {
     if (fileInputRef.current) {
       //@ts-ignore
@@ -16,6 +17,7 @@ const UtilsSection = () => {
     <div className="grid grid-cols-6 p-5 gap-10">
       <div className="col-span-4">
         <Input
+          disabled
           className="text-pilop bg-white w-full"
           placeholder="Search a movie"
         />
