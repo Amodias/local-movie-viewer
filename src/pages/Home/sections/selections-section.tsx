@@ -1,5 +1,5 @@
 import React from "react";
-import { MoviesItem } from "../../../components/ui/movies-item";
+import { MoviesItem } from "../../../components/movies-item";
 import { ScrollArea } from "../../../components/ui/scroll-area";
 const SelectionsSection = () => {
   return (

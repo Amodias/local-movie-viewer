@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Button } from "./button";
+import { Button } from "./ui/button";
 import { faChain, faPlay, faTrash } from "@fortawesome/free-solid-svg-icons";
 
 const MoviesItem = () => {
