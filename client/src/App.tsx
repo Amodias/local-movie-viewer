@@ -1,20 +1,21 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Home } from "./pages/Home";
-import { IPProvider } from "./contexts/IPContext";
+import { HostProvider } from "./contexts/HostContext";
+import { useHostContext } from "./contexts/HostContext";
 
 import Cinema from "./pages/Cinema";
 
 const App = () => {
   return (
-    <IPProvider>
+    <HostProvider>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/cinema/:x" element={<Cinema />} />
         </Routes>
       </BrowserRouter>
-    </IPProvider>
+    </HostProvider>
   );
 };
 

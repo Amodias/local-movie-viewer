@@ -1,31 +1,38 @@
 import React, { useEffect } from "react";
 import { MovieSection, SelectionsSection, UtilsSection } from "./sections";
 import { MovieProvider } from "../../contexts/MovieContext";
-import { useIPContext } from "../../contexts/IPContext";
+import { useHostContext } from "../../contexts/HostContext";
+import { MovieUploaderProvider } from "../../contexts/MovieUploaderContext";
 
 const Home = () => {
-  const { setIP } = useIPContext();
+  const { setClientHost, setServerHost } = useHostContext();
 
   useEffect(() => {
-    const hostname = window.location.hostname;
-    setIP(hostname + ":8000");
-  }, []);
+    const updateHost = () => {
+      const hostname = window.location.hostname;
+      setClientHost("http://" + hostname + ":3000");
+      setServerHost("http://" + hostname + ":8000");
+    };
 
+    updateHost();
+  }, [setClientHost, setServerHost]);
   return (
     <MovieProvider>
-      <div className=" grid grid-cols-6 p-10 gap-8">
-        <div className="col-span-4 bg-primary rounded-lg">
-          <MovieSection />
-        </div>
-        <div className="col-span-2 bg-primary p-10 rounded-lg">
-          <div className="bg-secondary rounded">
-            <UtilsSection />
+      <MovieUploaderProvider>
+        <div className=" grid grid-cols-6 p-10 gap-8">
+          <div className="col-span-4 bg-primary rounded-lg">
+            <MovieSection />
           </div>
-          <div className="bg-secondary rounded mt-5 p-5">
-            <SelectionsSection />
+          <div className="col-span-2 bg-primary p-10 rounded-lg">
+            <div className="bg-secondary rounded">
+              <UtilsSection />
+            </div>
+            <div className="bg-secondary rounded mt-5 p-5">
+              <SelectionsSection />
+            </div>
           </div>
         </div>
-      </div>
+      </MovieUploaderProvider>
     </MovieProvider>
   );
 };

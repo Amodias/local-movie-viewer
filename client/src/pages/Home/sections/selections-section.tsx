@@ -1,32 +1,30 @@
 import React, { useEffect, useState } from "react";
 import { ScrollArea } from "../../../components/ui/scroll-area";
 import { MoviesItem } from "../../../components/movies-item";
-import { useIPContext } from "../../../contexts/IPContext";
+import { useHostContext } from "../../../contexts/HostContext";
+import axios from "axios";
 
 const SelectionsSection = () => {
-  const [movies, setMovies] = useState([]);
-  const { IP } = useIPContext();
+  const [movies, setMovies] = useState<string[]>([]);
+  const { serverHost } = useHostContext();
 
   useEffect(() => {
-    fetchMovies();
-  }, []);
+    if (serverHost) {
+      fetchMovies();
+    }
+  }, [serverHost]);
 
   const fetchMovies = async () => {
     try {
-      const response = await fetch(`http://${IP}/movies`);
-      if (response.ok) {
-        const data = await response.json();
-        setMovies(data);
-      } else {
-        console.error("Failed to fetch movies:", response.statusText);
-      }
+      const response = await axios.get(`${serverHost}/movies`);
+      setMovies(response.data);
     } catch (error) {
       console.error("Error fetching movies:", error);
     }
   };
 
   return (
-    <ScrollArea className="h-[680px]  rounded-md p-5">
+    <ScrollArea className="h-[680px] rounded-md p-5">
       <div className="space-y-10">
         {movies.map((movie, index) => (
           <MoviesItem key={index} url={movie} />

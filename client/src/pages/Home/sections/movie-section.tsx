@@ -10,17 +10,17 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faQrcode } from "@fortawesome/free-solid-svg-icons";
 import { Player } from "video-react";
 import { useMovieContext } from "../../../contexts/MovieContext";
-import { useIPContext } from "../../../contexts/IPContext";
+import { useHostContext } from "../../../contexts/HostContext";
 
 const MovieSection = () => {
   const { moviePath } = useMovieContext();
-  const { IP } = useIPContext();
+  const { serverHost, clientHost } = useHostContext();
 
   return (
     <div className="h-full w-full">
       <div className="px-5 pb-2 pt-10">
         {moviePath ? (
-          <Player playsInline src={`http://${IP}/media/` + moviePath} />
+          <Player playsInline src={`${serverHost}/media/` + moviePath} />
         ) : (
           <div className="grid justify-center">
             <img className="  " src="logo.png" />
@@ -36,7 +36,7 @@ const MovieSection = () => {
             <FontAwesomeIcon icon={faQrcode} size="2x" />
           </PopoverTrigger>
           <PopoverContent>
-            <QRCode value={IP + "/cinema/" + moviePath} />
+            <QRCode value={clientHost + "/cinema/" + moviePath} />
           </PopoverContent>
         </Popover>
       </div>
