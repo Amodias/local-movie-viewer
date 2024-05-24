@@ -21,7 +21,7 @@ const MovieSection = () => {
     <div className="h-full w-full">
       <div className="px-5 pb-2 pt-10">
         {moviePath ? (
-          <Player playsInline src={`${serverHost}/media/` + moviePath} />
+          <Player playsInline src={`${serverHost}` + moviePath} />
         ) : (
           <div className="grid justify-center">
             <img className="  " src="logo.png" />

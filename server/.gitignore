@@ -8,11 +8,15 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
+
+
 # Environment variables
 .env
 
 # Media folder (optional)
 media/
 
+
+movies.json
 # Others
 .DS_Store

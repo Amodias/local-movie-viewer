@@ -5,8 +5,15 @@ import { useHostContext } from "../../../contexts/HostContext";
 import { useMovieUploaderContext } from "../../../contexts/MovieUploaderContext";
 import axios from "axios";
 
-const SelectionsSection = () => {
-  const [movies, setMovies] = useState<string[]>([]);
+interface Movie {
+  id: number;
+  name: string;
+  path: string;
+  imagePath: string;
+}
+
+const SelectionsSection: React.FC = () => {
+  const [movies, setMovies] = useState<Movie[]>([]);
   const { serverHost } = useHostContext();
   const { uploadedMovie } = useMovieUploaderContext();
 
@@ -18,7 +25,7 @@ const SelectionsSection = () => {
 
   const fetchMovies = async () => {
     try {
-      const response = await axios.get(`${serverHost}/movies`);
+      const response = await axios.get<Movie[]>(`${serverHost}/movies`);
       setMovies(response.data);
     } catch (error) {
       console.error("Error fetching movies:", error);
@@ -28,8 +35,8 @@ const SelectionsSection = () => {
   return (
     <ScrollArea className="h-[680px] rounded-md p-5">
       <div className="space-y-10">
-        {movies.map((movie, index) => (
-          <MoviesItem key={index} url={movie} />
+        {movies.map((movie) => (
+          <MoviesItem key={movie.id} movie={movie} />
         ))}
       </div>
     </ScrollArea>

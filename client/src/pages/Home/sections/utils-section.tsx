@@ -43,80 +43,65 @@ const UtilsSection = () => {
   };
 
   return (
-    <div className="grid grid-cols-6 p-5 gap-10">
-      <div className="col-span-4">
-        <Input
-          disabled
-          className="text-pilop bg-white w-full"
-          placeholder="Search a movie"
-        />
-      </div>
-      <div className="col-span-2 sm:col-span-1">
-        <Dialog>
-          {" "}
-          {/* Use isOpen and onDismiss props to control dialog visibility */}
-          <DialogTrigger asChild>
-            <Button className="bg-piloup text-white w-full sm:text-sm">
-              {" "}
-              {/* Set isDialogOpen to true to open the dialog */}
-              Link a movie
+    <div className="">
+      <Dialog>
+        <DialogTrigger asChild>
+          <Button className="bg-piloup text-white w-full sm:text-sm">
+            Link a movie
+          </Button>
+        </DialogTrigger>
+        <DialogContent className="sm:max-w-[425px] bg-slate-200">
+          <DialogHeader>
+            <DialogTitle>Movie Linker Form</DialogTitle>
+            <DialogDescription>
+              Make changes to your profile here. Click save when you're done.
+            </DialogDescription>
+          </DialogHeader>
+          <div>
+            <Input
+              id="name"
+              value={movieName}
+              placeholder="Movie name"
+              onChange={(e) => setMovieName(e.target.value)}
+            />
+          </div>
+          <div {...getRootProps()}>
+            <input
+              type="file"
+              ref={fileInputRef}
+              disabled={!!uploadedMovie}
+              onChange={(e) => {}}
+              style={{ display: "none" }}
+              {...getInputProps()}
+            />
+            <Button
+              className=" text-white w-full sm:text-sm flex-row "
+              onClick={linkMovie}
+              disabled={!!uploadedMovie}
+            >
+              <p>
+                {!!uploadedMovie
+                  ? " Movie Uploaded"
+                  : isLoading
+                  ? "Uploading..."
+                  : "Upload the Movie"}
+              </p>
+              {isLoading && <FontAwesomeIcon icon={faSpinner} spin />}
             </Button>
-          </DialogTrigger>
-          <DialogContent className="sm:max-w-[425px] bg-slate-200">
-            <DialogHeader>
-              <DialogTitle>Movie Linker Form</DialogTitle>
-              <DialogDescription>
-                Make changes to your profile here. Click save when you're done.
-              </DialogDescription>
-            </DialogHeader>
-            <div>
-              <Input
-                id="name"
-                value={movieName}
-                placeholder="Movie name"
-                onChange={(e) => setMovieName(e.target.value)}
-              />
-            </div>
-            <div {...getRootProps()}>
-              <input
-                type="file"
-                ref={fileInputRef}
-                disabled={!!uploadedMovie}
-                onChange={(e) => {
-                  // Handle file change here
-                }}
-                style={{ display: "none" }}
-                {...getInputProps()}
-              />
+          </div>
+          <DialogFooter>
+            <DialogClose asChild ref={dialogCloseRef}>
               <Button
-                className=" text-white w-full sm:text-sm flex-row "
-                onClick={linkMovie}
-                disabled={!!uploadedMovie}
+                className="bg-piloup text-white w-full sm:text-sm"
+                type="button"
+                onClick={onCloseButtonClick}
               >
-                <p>
-                  {!!uploadedMovie
-                    ? " Movie Uploaded"
-                    : isLoading
-                    ? "Uploading..."
-                    : "Upload the Movie"}
-                </p>
-                {isLoading && <FontAwesomeIcon icon={faSpinner} spin />}
+                Finish
               </Button>
-            </div>
-            <DialogFooter>
-              <DialogClose asChild ref={dialogCloseRef}>
-                <Button
-                  className="bg-piloup text-white w-full sm:text-sm"
-                  type="button"
-                  onClick={onCloseButtonClick}
-                >
-                  Finish
-                </Button>
-              </DialogClose>
-            </DialogFooter>
-          </DialogContent>
-        </Dialog>
-      </div>
+            </DialogClose>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };
