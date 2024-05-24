@@ -4,21 +4,10 @@ import { faChain, faPlay, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { useIndexedDB } from "react-indexed-db-hook";
 import { useMovieContext } from "../contexts/MovieContext";
 
-const MoviesItem = ({ url, id }: { url: string; id: string }) => {
-  const { deleteRecord } = useIndexedDB("movies");
-  const { setMovieId } = useMovieContext();
+const MoviesItem = ({ url }: { url: string }) => {
+  const { setMoviePath } = useMovieContext();
   const handlePlayButtonClick = () => {
-    setMovieId(id);
-  };
-  const handleDelete = () => {
-    deleteRecord(id).then(
-      () => {
-        console.log("Movie deleted successfully");
-      },
-      (error) => {
-        console.error("Error deleting movie:", error);
-      }
-    );
+    setMoviePath(url);
   };
 
   return (
@@ -35,10 +24,7 @@ const MoviesItem = ({ url, id }: { url: string; id: string }) => {
         >
           <FontAwesomeIcon icon={faPlay} />
         </Button>
-        <Button
-          className="absolute top-24 right-5 bg-piloup rounded-md text-white p-4  hover:bg-red-700 my-5 mx-2"
-          onClick={handleDelete} // Attach onClick handler to delete button
-        >
+        <Button className="absolute top-24 right-5 bg-piloup rounded-md text-white p-4  hover:bg-red-700 my-5 mx-2">
           <FontAwesomeIcon icon={faTrash} />
         </Button>
       </div>

@@ -61,6 +61,8 @@ app.get("/movies", (req, res) => {
   }
 });
 
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+// Listen on a specific IP address of the local network
+const ipAddress = "0.0.0.0"; // Replace with your desired IP address
+app.listen(8000, "192.168.1.42", () => {
+  console.log(`Server is running on ${ipAddress}:${PORT}`);
 });

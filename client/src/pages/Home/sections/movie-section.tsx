@@ -11,32 +11,34 @@ import { faQrcode } from "@fortawesome/free-solid-svg-icons";
 import { Player } from "video-react";
 import { useMovieContext } from "../../../contexts/MovieContext";
 import { useIndexedDB } from "react-indexed-db-hook";
+import { Link } from "react-router-dom";
 
 const MovieSection = () => {
-  const { movieId } = useMovieContext();
+  const { moviePath } = useMovieContext();
   const { getByID } = useIndexedDB("movies");
-  const [movieUrl, setMovieUrl] = useState();
+  const [movieUrl, setMovieUrl] = useState("");
   const [serverIpAddress, setServerIpAddress] = useState("");
+  const hostname = window.location.hostname;
 
   useEffect(() => {
-    const hostname = window.location.hostname;
     const port = window.location.port;
     setServerIpAddress(`http://${hostname}:${port}`);
   }, []);
 
   useEffect(() => {
-    if (movieId) {
-      getByID(movieId).then((movieFromDB) => {
-        setMovieUrl(movieFromDB.url);
-      });
+    if (moviePath) {
+      setMovieUrl(moviePath);
     }
-  }, [movieId]);
+  }, [moviePath]);
 
   return (
     <div className="h-full w-full">
       <div className="px-5 pb-2 pt-10">
-        {movieId ? (
-          <Player playsInline src={movieUrl} />
+        {moviePath ? (
+          <Player
+            playsInline
+            src={`http://${hostname}:8000/media/` + movieUrl}
+          />
         ) : (
           <div className="grid justify-center">
             <img className="  " src="logo.png" />
@@ -47,12 +49,15 @@ const MovieSection = () => {
         <Popover>
           <PopoverTrigger
             className="bg-piloup text-white p-3 rounded-md "
-            disabled={movieId ? false : true}
+            disabled={moviePath ? false : true}
           >
             <FontAwesomeIcon icon={faQrcode} size="2x" />
           </PopoverTrigger>
           <PopoverContent>
-            <QRCode value={serverIpAddress} className="" />
+            <QRCode
+              value={serverIpAddress + "/cinema/" + movieUrl}
+              className=""
+            />
           </PopoverContent>
         </Popover>
       </div>

@@ -4,6 +4,7 @@ import { useIndexedDB } from "react-indexed-db-hook";
 
 const useMovieUploader = () => {
   const { add } = useIndexedDB("movies");
+  const hostname = window.location.hostname;
   const { getRootProps, getInputProps } = useDropzone({
     accept: {
       "video/*": ["*"],
@@ -15,7 +16,7 @@ const useMovieUploader = () => {
 
         try {
           const response = await axios.post(
-            "http://localhost:8000/upload",
+            `http://${hostname}:8000/upload`,
             formData,
             {
               headers: {

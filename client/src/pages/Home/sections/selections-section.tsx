@@ -1,8 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { ScrollArea } from "../../../components/ui/scroll-area";
+import { MovieProvider, useMovieContext } from "@/src/contexts/MovieContext";
+import { MoviesItem } from "../../../components/movies-item";
 
 const SelectionsSection = () => {
   const [movies, setMovies] = useState([]);
+  const hostname = window.location.hostname;
 
   useEffect(() => {
     fetchMovies();
@@ -10,7 +13,7 @@ const SelectionsSection = () => {
 
   const fetchMovies = async () => {
     try {
-      const response = await fetch("http://localhost:8000/movies");
+      const response = await fetch(`http://${hostname}:8000/movies`);
       if (response.ok) {
         const data = await response.json();
         setMovies(data);
@@ -26,12 +29,7 @@ const SelectionsSection = () => {
     <ScrollArea className="h-[680px]  rounded-md p-5">
       <div className="space-y-10">
         {movies.map((movie, index) => (
-          <div key={index}>
-            <video controls>
-              <source src={`http://localhost:8000${movie}`} type="video/mp4" />
-              Your browser does not support the video tag.
-            </video>
-          </div>
+          <MoviesItem key={index} url={movie} />
         ))}
       </div>
     </ScrollArea>
