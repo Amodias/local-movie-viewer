@@ -28,19 +28,18 @@ const MovieSection = () => {
           </div>
         )}
       </div>
-      <div className="grid justify-center">
-        <Popover>
-          <PopoverTrigger
-            className="bg-piloup text-white p-3 rounded-md "
-            disabled={moviePath ? false : true}
-          >
-            <FontAwesomeIcon icon={faQrcode} size="2x" />
-          </PopoverTrigger>
-          <PopoverContent>
-            <QRCode value={clientHost + "/cinema/" + moviePath} />
-          </PopoverContent>
-        </Popover>
-      </div>
+      {moviePath && (
+        <div className="grid justify-center">
+          <Popover>
+            <PopoverTrigger className="bg-piloup text-white p-3 rounded-md ">
+              <FontAwesomeIcon icon={faQrcode} size="2x" />
+            </PopoverTrigger>
+            <PopoverContent>
+              <QRCode value={clientHost + "/cinema/" + moviePath} />
+            </PopoverContent>
+          </Popover>
+        </div>
+      )}
     </div>
   );
 };
