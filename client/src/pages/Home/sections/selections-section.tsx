@@ -1,6 +1,5 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ScrollArea } from "../../../components/ui/scroll-area";
-import { MovieProvider, useMovieContext } from "@/src/contexts/MovieContext";
 import { MoviesItem } from "../../../components/movies-item";
 
 const SelectionsSection = () => {

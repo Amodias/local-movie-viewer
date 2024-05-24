@@ -1,7 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Button } from "./ui/button";
-import { faChain, faPlay, faTrash } from "@fortawesome/free-solid-svg-icons";
-import { useIndexedDB } from "react-indexed-db-hook";
+import { faPlay, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { useMovieContext } from "../contexts/MovieContext";
 
 const MoviesItem = ({ url }: { url: string }) => {

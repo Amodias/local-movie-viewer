@@ -10,12 +10,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faQrcode } from "@fortawesome/free-solid-svg-icons";
 import { Player } from "video-react";
 import { useMovieContext } from "../../../contexts/MovieContext";
-import { useIndexedDB } from "react-indexed-db-hook";
-import { Link } from "react-router-dom";
 
 const MovieSection = () => {
   const { moviePath } = useMovieContext();
-  const { getByID } = useIndexedDB("movies");
   const [movieUrl, setMovieUrl] = useState("");
   const [serverIpAddress, setServerIpAddress] = useState("");
   const hostname = window.location.hostname;
@@ -54,10 +51,7 @@ const MovieSection = () => {
             <FontAwesomeIcon icon={faQrcode} size="2x" />
           </PopoverTrigger>
           <PopoverContent>
-            <QRCode
-              value={serverIpAddress + "/cinema/" + movieUrl}
-              className=""
-            />
+            <QRCode value={serverIpAddress + "/cinema/" + movieUrl} />
           </PopoverContent>
         </Popover>
       </div>

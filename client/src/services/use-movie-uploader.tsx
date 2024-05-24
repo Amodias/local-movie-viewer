@@ -1,9 +1,7 @@
 import axios from "axios";
 import { useDropzone } from "react-dropzone";
-import { useIndexedDB } from "react-indexed-db-hook";
 
 const useMovieUploader = () => {
-  const { add } = useIndexedDB("movies");
   const hostname = window.location.hostname;
   const { getRootProps, getInputProps } = useDropzone({
     accept: {
@@ -32,15 +30,6 @@ const useMovieUploader = () => {
     },
   });
   return { getRootProps, getInputProps };
-};
-
-const readFileAsDataURL = (file: File) => {
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.onload = () => resolve(reader.result);
-    reader.onerror = reject;
-    reader.readAsDataURL(file);
-  });
 };
 
 export default useMovieUploader;
