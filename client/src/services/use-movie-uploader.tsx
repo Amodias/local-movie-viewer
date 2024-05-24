@@ -1,8 +1,9 @@
 import axios from "axios";
 import { useDropzone } from "react-dropzone";
+import { useIPContext } from "../contexts/IPContext";
 
 const useMovieUploader = () => {
-  const hostname = window.location.hostname;
+  const { IP } = useIPContext();
   const { getRootProps, getInputProps } = useDropzone({
     accept: {
       "video/*": ["*"],
@@ -13,15 +14,11 @@ const useMovieUploader = () => {
         formData.append("file", file);
 
         try {
-          const response = await axios.post(
-            `http://${hostname}:8000/upload`,
-            formData,
-            {
-              headers: {
-                "Content-Type": "multipart/form-data",
-              },
-            }
-          );
+          const response = await axios.post(`http://${IP}/upload`, formData, {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+          });
           console.log("File uploaded successfully:", response.data);
         } catch (error) {
           console.error("Error uploading file:", error);

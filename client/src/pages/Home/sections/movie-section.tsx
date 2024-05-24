@@ -10,32 +10,17 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faQrcode } from "@fortawesome/free-solid-svg-icons";
 import { Player } from "video-react";
 import { useMovieContext } from "../../../contexts/MovieContext";
+import { useIPContext } from "../../../contexts/IPContext";
 
 const MovieSection = () => {
   const { moviePath } = useMovieContext();
-  const [movieUrl, setMovieUrl] = useState("");
-  const [serverIpAddress, setServerIpAddress] = useState("");
-  const hostname = window.location.hostname;
-
-  useEffect(() => {
-    const port = window.location.port;
-    setServerIpAddress(`http://${hostname}:${port}`);
-  }, []);
-
-  useEffect(() => {
-    if (moviePath) {
-      setMovieUrl(moviePath);
-    }
-  }, [moviePath]);
+  const { IP } = useIPContext();
 
   return (
     <div className="h-full w-full">
       <div className="px-5 pb-2 pt-10">
         {moviePath ? (
-          <Player
-            playsInline
-            src={`http://${hostname}:8000/media/` + movieUrl}
-          />
+          <Player playsInline src={`http://${IP}/media/` + moviePath} />
         ) : (
           <div className="grid justify-center">
             <img className="  " src="logo.png" />
@@ -51,7 +36,7 @@ const MovieSection = () => {
             <FontAwesomeIcon icon={faQrcode} size="2x" />
           </PopoverTrigger>
           <PopoverContent>
-            <QRCode value={serverIpAddress + "/cinema/" + movieUrl} />
+            <QRCode value={IP + "/cinema/" + moviePath} />
           </PopoverContent>
         </Popover>
       </div>

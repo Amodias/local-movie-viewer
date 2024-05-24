@@ -1,8 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { MovieSection, SelectionsSection, UtilsSection } from "./sections";
 import { MovieProvider } from "../../contexts/MovieContext";
+import { useIPContext } from "../../contexts/IPContext";
 
 const Home = () => {
+  const { setIP } = useIPContext();
+
+  useEffect(() => {
+    const hostname = window.location.hostname;
+    setIP(hostname + ":8000");
+  }, []);
+
   return (
     <MovieProvider>
       <div className=" grid grid-cols-6 p-10 gap-8">

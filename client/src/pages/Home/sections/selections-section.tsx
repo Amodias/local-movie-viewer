@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { ScrollArea } from "../../../components/ui/scroll-area";
 import { MoviesItem } from "../../../components/movies-item";
+import { useIPContext } from "../../../contexts/IPContext";
 
 const SelectionsSection = () => {
   const [movies, setMovies] = useState([]);
-  const hostname = window.location.hostname;
+  const { IP } = useIPContext();
 
   useEffect(() => {
     fetchMovies();
@@ -12,7 +13,7 @@ const SelectionsSection = () => {
 
   const fetchMovies = async () => {
     try {
-      const response = await fetch(`http://${hostname}:8000/movies`);
+      const response = await fetch(`http://${IP}/movies`);
       if (response.ok) {
         const data = await response.json();
         setMovies(data);
