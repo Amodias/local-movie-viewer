@@ -2,17 +2,19 @@ import React, { useEffect, useState } from "react";
 import { ScrollArea } from "../../../components/ui/scroll-area";
 import { MoviesItem } from "../../../components/movies-item";
 import { useHostContext } from "../../../contexts/HostContext";
+import { useMovieUploaderContext } from "../../../contexts/MovieUploaderContext";
 import axios from "axios";
 
 const SelectionsSection = () => {
   const [movies, setMovies] = useState<string[]>([]);
   const { serverHost } = useHostContext();
+  const { uploadedMovie } = useMovieUploaderContext();
 
   useEffect(() => {
     if (serverHost) {
       fetchMovies();
     }
-  }, [serverHost]);
+  }, [serverHost, uploadedMovie]);
 
   const fetchMovies = async () => {
     try {

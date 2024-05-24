@@ -11,6 +11,7 @@ import { faQrcode } from "@fortawesome/free-solid-svg-icons";
 import { Player } from "video-react";
 import { useMovieContext } from "../../../contexts/MovieContext";
 import { useHostContext } from "../../../contexts/HostContext";
+import { Link } from "react-router-dom";
 
 const MovieSection = () => {
   const { moviePath } = useMovieContext();

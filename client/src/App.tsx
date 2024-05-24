@@ -10,13 +10,30 @@ const App = () => {
   return (
     <HostProvider>
       <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/cinema/:x" element={<Cinema />} />
-        </Routes>
+        <AppInit />
       </BrowserRouter>
     </HostProvider>
   );
 };
 
+const AppInit = () => {
+  const { setClientHost, setServerHost } = useHostContext();
+
+  useEffect(() => {
+    const updateHost = () => {
+      const hostname = window.location.hostname;
+      setClientHost("http://" + hostname + ":3000");
+      setServerHost("http://" + hostname + ":8000");
+    };
+
+    updateHost();
+  }, [setClientHost, setServerHost]);
+
+  return (
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/cinema/:x" element={<Cinema />} />
+    </Routes>
+  );
+};
 export default App;
