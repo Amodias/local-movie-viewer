@@ -14,7 +14,7 @@ const Cinema = () => {
         <img className=" " src="logo.png" alt="Logo" />
       </div>
       {x ? (
-        <Player playsInline src={`${serverHost}` + x} />
+        <Player playsInline src={`${serverHost}/media/` + x} />
       ) : (
         // <Player playsInline src={`http://192.168.1.42:8000/media/` + x} />
         <div className="grid justify-center">

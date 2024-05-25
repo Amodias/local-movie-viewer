@@ -17,6 +17,7 @@ const MovieSection = () => {
   const { moviePath } = useMovieContext();
   const { serverHost, clientHost } = useHostContext();
 
+  const x = moviePath?.split("/").pop();
   return (
     <div className="h-full w-full">
       <div className="px-5 pb-2 pt-10">
@@ -35,7 +36,7 @@ const MovieSection = () => {
               <FontAwesomeIcon icon={faQrcode} size="2x" />
             </PopoverTrigger>
             <PopoverContent>
-              <QRCode value={clientHost + "/cinema/" + moviePath} />
+              <QRCode value={clientHost + "/cinema/" + x} />
             </PopoverContent>
           </Popover>
         </div>
