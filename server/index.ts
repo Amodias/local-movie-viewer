@@ -177,7 +177,7 @@ app.delete("/movies/:id", (req, res) => {
 });
 
 // Listen on a specific IP address of the local network
-const ipAddress = "192.168.0.6"; // Replace with your desired IP address
+const ipAddress = process.env.HOST || "127.0.0.1";
 app.listen(PORT, ipAddress, () => {
   console.log(`Server is running on ${ipAddress}:${PORT}`);
 });
