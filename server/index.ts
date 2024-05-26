@@ -10,6 +10,7 @@ const PORT = 8000;
 const mediaDirectory = path.join(__dirname, "media");
 const thumbnailsDirectory = path.join(mediaDirectory, "thumbnails");
 const moviesFilePath = path.join(__dirname, "movies.json");
+const defaultThumbnail = path.join(thumbnailsDirectory, "default.png");
 
 app.use(cors());
 
@@ -58,7 +59,6 @@ app.post("/upload", upload.single("file"), (req, res) => {
       const movieEntry = {
         id: Date.now(), // Use current timestamp as a unique ID
         // @ts-ignore
-
         name: req.file.originalname,
         // @ts-ignore
         path: `/media/${req.file.filename}`,
@@ -94,7 +94,40 @@ app.post("/upload", upload.single("file"), (req, res) => {
     })
     .on("error", (err) => {
       console.error("Error generating thumbnail:", err);
-      res.status(500).send("Error generating thumbnail");
+
+      // Create movie entry with default thumbnail
+      const movieEntry = {
+        id: Date.now(),
+        // @ts-ignore
+        name: req.file.originalname,
+        // @ts-ignore
+        path: `/media/${req.file.filename}`,
+        imagePath: `/media/thumbnails/default.png`,
+      };
+
+      // Read the existing movies file
+      fs.readFile(moviesFilePath, (err, data) => {
+        if (err) {
+          console.error("Error reading movies file:", err);
+          return res.status(500).send("Internal Server Error");
+        }
+
+        // Parse the JSON file
+        const movies = JSON.parse(data.toString());
+
+        // Add the new movie entry
+        movies.push(movieEntry);
+
+        // Write the updated movies back to the JSON file
+        fs.writeFile(moviesFilePath, JSON.stringify(movies, null, 2), (err) => {
+          if (err) {
+            console.error("Error writing to movies file:", err);
+            return res.status(500).send("Internal Server Error");
+          }
+
+          res.status(200).json({ filePath: movieEntry.path });
+        });
+      });
     })
     .screenshots({
       count: 1,
